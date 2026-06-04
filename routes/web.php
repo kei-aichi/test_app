@@ -38,7 +38,7 @@ Route::get('/', function () {
 //     return view('layouts.admin');
 // });
 // Route::middleware('auth')->prefix('admin')->group( function () {
-Route::middleware('superadmin')->prefix('super')->group( function () {
+Route::middleware('superadmin')->prefix('super')->group(function () {
 
     Route::get('/', [AdminController::class, 'index'])->name('super.dashboard');
     Route::get('/sample', [AdminController::class, 'sample'])->name('view.sample');
@@ -48,22 +48,22 @@ Route::middleware('superadmin')->prefix('super')->group( function () {
     // Route::resource('attendance', AttendanceController::class);
     Route::resource('leaves', LeaveController::class);
     // Route::resource('salary', SalaryController::class);
-    Route::resource('allowance',AllowanceController::class);
-    Route::resource('payroll',PayrollController::class);
-    Route::resource('roles',RoleController::class );
-    Route::resource('user',UserController::class );
-    Route::resource('attendance',AttendanceController::class );
-    Route::resource('schedule',ScheduleController::class );
-    Route::post('/check',[CheckController::class,'CheckStore'])->name('check.store');
-    Route::get('/report',[CheckController::class,'sheetReport'])->name('sheet.report');
+    // Route::resource('allowance',AllowanceController::class);
+    Route::resource('payroll', PayrollController::class);
+    Route::resource('roles', RoleController::class);
+    Route::resource('user', UserController::class);
+    Route::resource('attendance', AttendanceController::class);
+    Route::resource('schedule', ScheduleController::class);
+    Route::post('/check', [CheckController::class, 'CheckStore'])->name('check.store');
+    Route::get('/report', [CheckController::class, 'sheetReport'])->name('sheet.report');
     Route::get('/gross-salary', [PayrollController::class, 'grossSalary'])->name('gross.salary');
-    Route::get('/latetime',[LateTimeController::class,'index'])->name('attendance.latetime');
-    Route::post('/latetime',[LateTimeController::class,'lateTime'])->name('late.time');
-    Route::get('/overtime',[OverTimeController::class,'index'])->name('attendance.overtime');
-    Route::post('/overtime',[OverTimeController::class,'overTime'])->name('over.time');
+    Route::get('/latetime', [LateTimeController::class, 'index'])->name('attendance.latetime');
+    Route::post('/latetime', [LateTimeController::class, 'lateTime'])->name('late.time');
+    Route::get('/overtime', [OverTimeController::class, 'index'])->name('attendance.overtime');
+    Route::post('/overtime', [OverTimeController::class, 'overTime'])->name('over.time');
     Route::get('/barcode', [AttendanceController::class, 'barcode'])->name('attd.barcode');
     // Route::get('/report', [AttendanceController::class, 'report'])->name('attendance.report');
-    Route::resource('/leaves',LeaveController::class);
+    Route::resource('/leaves', LeaveController::class);
     // Route::post('/check/store', [PayrollController::class, ])->name('check.store');
     Route::post('/calculate', [PayrollController::class, 'calculatePayroll'])->name('calculate.payroll');
     Route::get('/sheet-report', [PayrollController::class, 'sheetReport'])->name('payroll.report');
@@ -71,9 +71,9 @@ Route::middleware('superadmin')->prefix('super')->group( function () {
 
 
 });
-Route::middleware('admin')->prefix('admin')->group( function () {
+Route::middleware('admin')->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::prefix('department')->group(function() {
+    Route::prefix('department')->group(function () {
         Route::get('/', [DepartmentController::class, 'index'])->name('admin.department.index');
         Route::get('/create', [DepartmentController::class, 'create'])->name('admin.department.create');
         Route::post('/', [DepartmentController::class, 'create'])->name('admin.department.store');
@@ -81,7 +81,7 @@ Route::middleware('admin')->prefix('admin')->group( function () {
         Route::put('/{id}', [DepartmentController::class, 'update'])->name('admin.department.update');
         Route::delete('/{id}', [DepartmentController::class, 'destroy'])->name('admin.department.destroy');
     });
-    Route::prefix('designation')->group(function() {
+    Route::prefix('designation')->group(function () {
         Route::get('/', [DesignationController::class, 'index'])->name('admin.designation.index');
         Route::get('/create', [DesignationController::class, 'create'])->name('admin.designation.create');
         Route::post('/', [DesignationController::class, 'create'])->name('admin.designation.store');
@@ -89,7 +89,7 @@ Route::middleware('admin')->prefix('admin')->group( function () {
         Route::put('/{id}', [DesignationController::class, 'update'])->name('admin.designation.update');
         Route::delete('/{id}', [DesignationController::class, 'destroy'])->name('admin.designation.destroy');
     });
-    Route::prefix('employee')->group(function() {
+    Route::prefix('employee')->group(function () {
         Route::get('/', [EmployeeController::class, 'index'])->name('admin.employee.index');
         Route::get('/create', [EmployeeController::class, 'create'])->name('admin.employee.create');
         Route::post('/', [EmployeeController::class, 'create'])->name('admin.employee.store');
@@ -97,7 +97,7 @@ Route::middleware('admin')->prefix('admin')->group( function () {
         Route::put('/{id}', [EmployeeController::class, 'update'])->name('admin.employee.update');
         Route::delete('/{id}', [EmployeeController::class, 'destroy'])->name('admin.employee.destroy');
     });
-    Route::prefix('schedule')->group(function() {
+    Route::prefix('schedule')->group(function () {
         Route::get('/', [ScheduleController::class, 'index'])->name('admin.schedule.index');
         Route::get('/create', [ScheduleController::class, 'create'])->name('admin.schedule.create');
         Route::post('/', [ScheduleController::class, 'create'])->name('admin.schedule.store');
@@ -106,11 +106,11 @@ Route::middleware('admin')->prefix('admin')->group( function () {
         Route::delete('/{id}', [ScheduleController::class, 'destroy'])->name('admin.schedule.destroy');
     });
     // Route::prefix('attendance')->group(function() {
-        Route::get('/attendance', [AttendanceController::class, 'index'])->name('admin.attendance.index');
-        Route::post('/check', [CheckController::class, 'CheckStore'])->name('admin.check.store');
-        Route::get('/report', [CheckController::class, 'sheetReport'])->name('admin.sheet.report');
+    Route::get('/attendance', [AttendanceController::class, 'index'])->name('admin.attendance.index');
+    Route::post('/check', [CheckController::class, 'CheckStore'])->name('admin.check.store');
+    Route::get('/report', [CheckController::class, 'sheetReport'])->name('admin.sheet.report');
     // });
-    Route::prefix('leaves')->group(function() {
+    Route::prefix('leaves')->group(function () {
         Route::get('/', [LeaveController::class, 'index'])->name('admin.leaves.index');
         Route::get('/create', [LeaveController::class, 'create'])->name('admin.leaves.create');
         Route::post('/', [LeaveController::class, 'create'])->name('admin.leaves.store');
@@ -119,7 +119,7 @@ Route::middleware('admin')->prefix('admin')->group( function () {
         Route::delete('/{id}', [LeaveController::class, 'destroy'])->name('admin.leaves.destroy');
     });
     // Route::resource('users',UserController::class );
-    Route::prefix('users')->group(function() {
+    Route::prefix('users')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('admin.users.index');
         Route::get('/create', [UserController::class, 'create'])->name('admin.users.create');
         Route::post('/', [UserController::class, 'store'])->name('admin.users.store');
@@ -127,19 +127,19 @@ Route::middleware('admin')->prefix('admin')->group( function () {
         Route::put('/{id}', [UserController::class, 'update'])->name('admin.users.update');
         Route::delete('/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
     });
-    Route::prefix('payroll')->group(function() {
-        
+    Route::prefix('payroll')->group(function () {
+
         Route::get('/', [PayrollController::class, 'index'])->name('admin.payroll.index');
         Route::get('/create', [PayrollController::class, 'create'])->name('admin.payroll.create');
-        
+
 
     });
     Route::post('/calculate', [PayrollController::class, 'calculatePayroll'])->name('admin.calculate.payroll');
 });
 
-Route::middleware('moderator')->prefix('moderator')->group( function () {
+Route::middleware('moderator')->prefix('moderator')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('moderator.dashboard');
-    Route::prefix('schedule')->group(function() {
+    Route::prefix('schedule')->group(function () {
         Route::get('/', [ScheduleController::class, 'index'])->name('moderator.schedule.index');
         Route::get('/create', [ScheduleController::class, 'create'])->name('moderator.schedule.create');
         Route::post('/', [ScheduleController::class, 'create'])->name('moderator.schedule.store');
@@ -148,15 +148,15 @@ Route::middleware('moderator')->prefix('moderator')->group( function () {
         Route::delete('/{id}', [ScheduleController::class, 'destroy'])->name('moderator.schedule.destroy');
     });
     // Route::prefix('attendance')->group(function() {
-        Route::get('/attendance', [AttendanceController::class, 'index'])->name('moderator.attendance.index');
-        Route::post('/check', [CheckController::class, 'CheckStore'])->name('moderator.check.store');
-        Route::get('/report', [CheckController::class, 'sheetReport'])->name('moderator.sheet.report');
+    Route::get('/attendance', [AttendanceController::class, 'index'])->name('moderator.attendance.index');
+    Route::post('/check', [CheckController::class, 'CheckStore'])->name('moderator.check.store');
+    Route::get('/report', [CheckController::class, 'sheetReport'])->name('moderator.sheet.report');
     // });
 });
 
-Route::middleware('hr')->prefix('hr-manager')->group( function () {
+Route::middleware('hr')->prefix('hr-manager')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('hr.dashboard');
-    Route::prefix('department')->group(function() {
+    Route::prefix('department')->group(function () {
         Route::get('/', [DepartmentController::class, 'index'])->name('hr.department.index');
         Route::get('/create', [DepartmentController::class, 'create'])->name('hr.department.create');
         Route::post('/', [DepartmentController::class, 'create'])->name('hr.department.store');
@@ -164,7 +164,7 @@ Route::middleware('hr')->prefix('hr-manager')->group( function () {
         Route::put('/{id}', [DepartmentController::class, 'update'])->name('hr.department.update');
         Route::delete('/{id}', [DepartmentController::class, 'destroy'])->name('hr.department.destroy');
     });
-    Route::prefix('designation')->group(function() {
+    Route::prefix('designation')->group(function () {
         Route::get('/', [DesignationController::class, 'index'])->name('hr.designation.index');
         Route::get('/create', [DesignationController::class, 'create'])->name('hr.designation.create');
         Route::post('/', [DesignationController::class, 'create'])->name('hr.designation.store');
@@ -172,7 +172,7 @@ Route::middleware('hr')->prefix('hr-manager')->group( function () {
         Route::put('/{id}', [DesignationController::class, 'update'])->name('hr.designation.update');
         Route::delete('/{id}', [DesignationController::class, 'destroy'])->name('hr.designation.destroy');
     });
-    Route::prefix('employee')->group(function() {
+    Route::prefix('employee')->group(function () {
         Route::get('/', [EmployeeController::class, 'index'])->name('hr.employee.index');
         Route::get('/create', [EmployeeController::class, 'create'])->name('hr.employee.create');
         Route::get('/{id}/show', [EmployeeController::class, 'show'])->name('hr.employee.show');
@@ -181,7 +181,7 @@ Route::middleware('hr')->prefix('hr-manager')->group( function () {
         Route::put('/{id}', [EmployeeController::class, 'update'])->name('hr.employee.update');
         Route::delete('/{id}', [EmployeeController::class, 'destroy'])->name('hr.employee.destroy');
     });
-    Route::prefix('leaves')->group(function() {
+    Route::prefix('leaves')->group(function () {
         Route::get('/', [LeaveController::class, 'index'])->name('hr.leaves.index');
         Route::get('/create', [LeaveController::class, 'create'])->name('hr.leaves.create');
         Route::post('/', [LeaveController::class, 'create'])->name('hr.leaves.store');
@@ -191,13 +191,13 @@ Route::middleware('hr')->prefix('hr-manager')->group( function () {
     });
 });
 
-Route::middleware('payroll')->prefix('manager')->group( function () {
+Route::middleware('payroll')->prefix('manager')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('payroll.dashboard');
-    Route::prefix('payroll')->group(function() {
-        
+    Route::prefix('payroll')->group(function () {
+
         Route::get('/', [PayrollController::class, 'index'])->name('manager.payroll.index');
         Route::get('/create', [PayrollController::class, 'create'])->name('manager.payroll.create');
-        
+
 
     });
     Route::post('/calculate', [PayrollController::class, 'calculatePayroll'])->name('manager.calculate.payroll');
@@ -213,4 +213,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
